@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">StoreLocationApp</string>
     <!--Progress dialog text-->
-    <string name="txt_loading">Učitavanje...</string>
+    <string name="txt_loading">Učitavanje…</string>
 </resources>
