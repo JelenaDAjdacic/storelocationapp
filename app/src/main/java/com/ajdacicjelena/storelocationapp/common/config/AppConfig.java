@@ -15,4 +15,8 @@ public class AppConfig {
      * The default backoff multiplier
      */
     public static final float DEFAULT_BACKOFF_MULT = 1f;
+    /**
+     * Shared Preferences key - locations list
+     */
+    public static final String LIST_STORAGE_KEY = "LOCATIONS_LIST";
 }

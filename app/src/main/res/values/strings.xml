@@ -2,4 +2,7 @@
     <string name="app_name">StoreLocationApp</string>
     <!--Progress dialog text-->
     <string name="txt_loading">Učitavanje…</string>
+
+    <string name="txt_image_description">Logo</string>
+    <string name="txt_store_description">Opis artikla:</string>
 </resources>
