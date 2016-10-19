@@ -1,12 +1,16 @@
 package com.ajdacicjelena.storelocationapp.models;
 
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-public class Store {
+public class Store implements Serializable{
     @SerializedName("id")
     @Expose
     private Integer id;

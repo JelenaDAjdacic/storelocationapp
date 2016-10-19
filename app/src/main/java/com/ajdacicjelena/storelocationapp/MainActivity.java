@@ -2,12 +2,14 @@ package com.ajdacicjelena.storelocationapp;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.ajdacicjelena.storelocationapp.common.config.AppConfig;
+import com.ajdacicjelena.storelocationapp.common.utils.ArrayUtils;
 import com.ajdacicjelena.storelocationapp.common.utils.SharedPreferencesUtils;
 import com.ajdacicjelena.storelocationapp.dialogs.ProgressDialogCustom;
 import com.ajdacicjelena.storelocationapp.fragments.ListTabFragment;
@@ -152,14 +154,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 public boolean onMarkerClick(Marker marker) {
                     marker.showInfoWindow();
                     Log.d("CLICKED MARKER", marker.getTitle());
+                    Intent intent = new Intent(getApplicationContext(), DetailsActivity.class);
+                    intent.putExtra("STORE", ArrayUtils.getElementByName(getLocationsList(), marker.getTitle()));
+                    startActivity(intent);
                     return true;
                 }
             });
 
-            for (int i = 0; i < getLocationsList().length; i++) {
+            for (Store store : getLocationsList()) {
                 googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(getLocationsList()[i].getLatitude(), getLocationsList()[i].getLongitude()))
-                        .title(getLocationsList()[i].getName()));
+                        .position(new LatLng(store.getLatitude(), store.getLongitude()))
+                        .title(store.getName()));
             }
         }
     }

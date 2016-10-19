@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ajdacicjelena.storelocationapp.R;
+import com.ajdacicjelena.storelocationapp.common.utils.JustifyTextView;
 import com.ajdacicjelena.storelocationapp.models.Store;
 import com.ajdacicjelena.storelocationapp.network.VolleySingleton;
 import com.android.volley.toolbox.ImageLoader;
@@ -19,7 +20,7 @@ public class RecyclerViewStores extends RecyclerView.Adapter<RecyclerView.ViewHo
     private Store[] stores;
     private Context context;
 
-    private TextView mStoreDescription;
+    private JustifyTextView mStoreDescription;
     private TextView mStoreName;
     private NetworkImageView mStoreLogo;
 
@@ -32,8 +33,19 @@ public class RecyclerViewStores extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             mStoreName = (TextView) view.findViewById(R.id.storeName);
             mStoreLogo = (NetworkImageView) view.findViewById(R.id.storeLogo);
-            mStoreDescription = (TextView) view.findViewById(R.id.short_description_txt);
+            mStoreDescription = (JustifyTextView) view.findViewById(R.id.short_description_txt);
 
+
+        }
+
+        void bind(final Store item, final OnItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    listener.onItemClick(item, itemView);
+                }
+            });
         }
 
     }
@@ -56,10 +68,11 @@ public class RecyclerViewStores extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
         holder.setIsRecyclable(false);
 
         if (holder instanceof MyViewHolder) {
-
+            ((MyViewHolder) holder).bind(stores[position], listener);
             mStoreName.setText(stores[position].getName());
             mStoreDescription.setText(stores[position].getDescription());
             ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();

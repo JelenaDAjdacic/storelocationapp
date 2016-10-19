@@ -2,6 +2,7 @@ package com.ajdacicjelena.storelocationapp.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ajdacicjelena.storelocationapp.DetailsActivity;
 import com.ajdacicjelena.storelocationapp.MainActivity;
 import com.ajdacicjelena.storelocationapp.R;
 import com.ajdacicjelena.storelocationapp.adapters.RecyclerViewStores;
@@ -34,7 +36,9 @@ public class ListTabFragment extends Fragment {
         RecyclerViewStores mAdapter = new RecyclerViewStores(activity, ((MainActivity) activity).getLocationsList(), new RecyclerViewStores.OnItemClickListener() {
             @Override
             public void onItemClick(Store item, View view) {
-
+                Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                intent.putExtra("STORE", item);
+                startActivity(intent);
             }
         });
         mRecyclerView.setAdapter(mAdapter);
