@@ -3,38 +3,41 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:baselineAligned="false"
-    android:orientation="horizontal"
-    android:weightSum="1">
+    android:orientation="vertical">
     <!-- layout for image -->
-    <FrameLayout
-        android:layout_width="0dp"
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/storeLogoDetail"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/txt_image_description" />
+
+
+    <TextView
+        android:id="@+id/textView_name_address_city"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight=".4"
-        android:padding="@dimen/standard_padding">
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/standard_padding"
+        android:textAlignment="center"
+        android:textColor="@color/primary_text"
+        android:textSize="@dimen/large_text_size"
+        android:textStyle="bold" />
 
-        <com.android.volley.toolbox.NetworkImageView
-            android:id="@+id/storeLogoDetail"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/image_placeholder"
-            android:contentDescription="@string/txt_image_description" />
-    </FrameLayout>
-
-    <!-- layout for text (prices). it contains one TextView, but can contain more than one TextView (in future) -->
-    <FrameLayout
-        android:layout_width="0dp"
-        android:layout_gravity="center_vertical"
+    <include
+        layout="@layout/table_basic_info"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight=".6"
-        android:padding="@dimen/standard_padding">
+        android:layout_margin="@dimen/standard_padding" />
 
-        <TextView
-            android:id="@+id/txtNameAddressCity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/large_text_size"/>
+    <TextView
+        android:id="@+id/textView_web_site"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:gravity="center_horizontal"
+        android:linksClickable="true" />
 
-    </FrameLayout>
 
 </LinearLayout>

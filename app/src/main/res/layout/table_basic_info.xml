@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="*"
+    android:weightSum="1">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/line_margine"
+        android:layout_marginLeft="@dimen/line_margine"
+        android:layout_marginRight="@dimen/line_margine"
+        android:layout_marginStart="@dimen/line_margine">
+
+        <TextView
+            android:id="@+id/textView_open"
+            style="@style/DetailsArticleTextView"
+            android:layout_width="0dp"
+            android:layout_gravity="start"
+            android:layout_weight=".5" />
+
+        <TextView
+            android:id="@+id/textView_promotion"
+            style="@style/DetailsArticleTextView"
+            android:layout_width="0dp"
+            android:layout_gravity="start"
+            android:layout_weight=".5"
+            android:text="@string/txt_no_promotion" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/line_margine"
+        android:layout_marginLeft="@dimen/line_margine"
+        android:layout_marginRight="@dimen/line_margine"
+        android:layout_marginStart="@dimen/line_margine">
+
+        <TextView
+            android:id="@+id/textView_distance"
+            style="@style/DetailsArticleTextView"
+            android:layout_width="0dp"
+            android:layout_gravity="start"
+            android:layout_weight=".5"
+            android:text="@string/txt_distance" />
+
+        <TextView
+            android:id="@+id/textView_review"
+            style="@style/DetailsArticleTextView"
+            android:layout_width="0dp"
+            android:layout_gravity="start"
+            android:layout_weight=".5"
+            android:text="@string/txt_review_number" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/line_margine"
+        android:layout_marginLeft="@dimen/line_margine"
+        android:layout_marginRight="@dimen/line_margine"
+        android:layout_marginStart="@dimen/line_margine">
+
+        <TextView
+            android:id="@+id/textView_id"
+            style="@style/DetailsArticleTextView"
+            android:layout_width="0dp"
+            android:layout_gravity="start"
+            android:layout_weight=".5"
+            android:text="@string/txt_id" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5">
+
+            <RatingBar
+                android:id="@+id/ratingBar_stars"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:max="1"
+                android:numStars="5"
+                android:rating="5.0"
+                android:stepSize="0.1" />
+        </LinearLayout>
+    </TableRow>
+</TableLayout>

@@ -1,14 +1,38 @@
 <resources>
-    <string name="app_name">StoreLocationApp</string>
+    <string name="app_name">Store Location App</string>
     <!--Progress dialog text-->
-    <string name="txt_loading">Učitavanje…</string>
+    <string name="txt_loading">Loading…</string>
+    <string name="txt_no_connection">No connection…</string>
 
     <!--Tab titles-->
-    <string name="txt_list">LISTA</string>
-    <string name="txt_map">MAPA</string>
+    <string name="txt_list">LIST</string>
+    <string name="txt_map">MAP</string>
+    <string name="txt_information">INFORMATION</string>
+    <string name="txt_description">DESCRIPTION</string>
+
     <!--descriptionACtivity strings-->
     <string name="txt_name_address_city">%1$s, %2$s, %3$s</string>
+    <string name="txt_review_number">Review number: %s</string>
+    <string name="txt_distance">Distance: %.2f km</string>
+    <string name="txt_promotion">Promotion: %s</string>
+    <string name="txt_no_promotion">Promotion: <i>No promotion</i></string>
+    <string name="txt_id">ID: %02d</string>
+    <string name="txt_open">Open</string>
+    <string name="txt_close">Close</string>
+
+    <!--timetable tablelayout strings-->
+    <string name="txt_day">day</string>
+    <string name="txt_working_hour">working hour</string>
+    <string name="txt_repertoire">repertoire</string>
+    <string name="txt_no_repertoire"><i>No repertoire</i></string>
+    <string name="txt_monday">monday</string>
+    <string name="txt_tuesday">tuesday</string>
+    <string name="txt_wednesday">wednesday</string>
+    <string name="txt_thursday">thursday</string>
+    <string name="txt_friday">friday</string>
+    <string name="txt_saturday">saturday</string>
+    <string name="txt_sunday">sunday</string>
 
     <string name="txt_image_description">Logo</string>
-    <string name="txt_store_description">Opis artikla:</string>
+    <string name="txt_store_description"><i>No description</i></string>
 </resources>

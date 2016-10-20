@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:orientation="vertical">
+    <!-- layout for image -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/storeLogoDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight=".15"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/txt_image_description"
+            android:scaleType="fitCenter" />
+
+        <include
+            layout="@layout/table_basic_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/land_standard_padding"
+            android:layout_weight=".85" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView_name_address_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/land_standard_padding"
+        android:textAlignment="center"
+        android:textColor="@color/primary_text"
+        android:textSize="@dimen/large_text_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView_web_site"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:gravity="center_horizontal"
+        android:linksClickable="true" />
+
+
+</LinearLayout>

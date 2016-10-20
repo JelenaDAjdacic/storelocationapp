@@ -1,38 +1,30 @@
 package com.ajdacicjelena.storelocationapp;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.LinearLayout;
 
+import com.ajdacicjelena.storelocationapp.adapters.ViewPagerAdapterMain;
 import com.ajdacicjelena.storelocationapp.common.config.AppConfig;
-import com.ajdacicjelena.storelocationapp.common.utils.ArrayUtils;
 import com.ajdacicjelena.storelocationapp.common.utils.SharedPreferencesUtils;
 import com.ajdacicjelena.storelocationapp.dialogs.ProgressDialogCustom;
-import com.ajdacicjelena.storelocationapp.fragments.ListTabFragment;
 import com.ajdacicjelena.storelocationapp.models.Store;
 import com.ajdacicjelena.storelocationapp.network.PullWebContent;
 import com.ajdacicjelena.storelocationapp.network.UrlEndpoints;
 import com.ajdacicjelena.storelocationapp.network.VolleySingleton;
 import com.ajdacicjelena.storelocationapp.network.WebRequestCallbackInterface;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainActivity extends AppCompatActivity {
     private VolleySingleton mVolleySingleton;
     private String TAG = "MainActivity";
     private Store[] mStores;
-    MapFragment mapTabFragment;
-    ListTabFragment listTabFragment;
     private TabLayout mTabLayout;
+    private LinearLayout layout;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +32,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        layout = (LinearLayout) findViewById(R.id.activity_main);
+
         mVolleySingleton = VolleySingleton.getsInstance(this);
-
-
-        getAllStoresLocation();
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                setCurrentTabFragment(tab.getPosition());
+                mViewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
@@ -61,6 +54,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             }
         });
+
+
+        getAllStoresLocation();
 
     }
 
@@ -99,7 +95,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 } else {
                     setLocationsList(new Store[]{});
                     setupTabLayout();
-                    Log.d(TAG, "NO_INTERNET_EMPTY_SHARED_PREFERENCES " + getLocationsList().length);
+                    Snackbar.make(layout, getString(R.string.txt_no_connection), Snackbar.LENGTH_LONG)
+                            .show();
 
                 }
                 progressDialog.hideDialog();
@@ -117,55 +114,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void setupTabLayout() {
-        mapTabFragment = new MapFragment();
-        mapTabFragment.getMapAsync(this);
-        listTabFragment = new ListTabFragment();
+
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.txt_list)), true);
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.txt_map)));
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        final ViewPagerAdapterMain adapter = new ViewPagerAdapterMain(getSupportFragmentManager(), 2,
+                getLocationsList(), this);
+
+        mViewPager.setAdapter(adapter);
     }
 
-    private void setCurrentTabFragment(int tabPosition) {
-        switch (tabPosition) {
-            case 0:
-                replaceFragment(listTabFragment);
-                break;
-            case 1:
-                mapTabFragment.getMapAsync(this);
-                replaceFragment(mapTabFragment);
-                break;
-        }
-    }
 
-    public void replaceFragment(Fragment fragment) {
-
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.frame_container, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        ft.commitAllowingStateLoss();
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        if (getLocationsList().length > 0) {
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(getLocationsList()[0].getLatitude(), getLocationsList()[0].getLongitude()), 12));
-            googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                @Override
-                public boolean onMarkerClick(Marker marker) {
-                    marker.showInfoWindow();
-                    Log.d("CLICKED MARKER", marker.getTitle());
-                    Intent intent = new Intent(getApplicationContext(), DetailsActivity.class);
-                    intent.putExtra("STORE", ArrayUtils.getElementByName(getLocationsList(), marker.getTitle()));
-                    startActivity(intent);
-                    return true;
-                }
-            });
-
-            for (Store store : getLocationsList()) {
-                googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(store.getLatitude(), store.getLongitude()))
-                        .title(store.getName()));
-            }
-        }
-    }
 }

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ajdacicjelena.storelocationapp.R;
-import com.ajdacicjelena.storelocationapp.common.utils.JustifyTextView;
 import com.ajdacicjelena.storelocationapp.models.Store;
 import com.ajdacicjelena.storelocationapp.network.VolleySingleton;
 import com.android.volley.toolbox.ImageLoader;
@@ -20,7 +19,7 @@ public class RecyclerViewStores extends RecyclerView.Adapter<RecyclerView.ViewHo
     private Store[] stores;
     private Context context;
 
-    private JustifyTextView mStoreDescription;
+    private TextView mStoreDescription;
     private TextView mStoreName;
     private NetworkImageView mStoreLogo;
 
@@ -33,7 +32,7 @@ public class RecyclerViewStores extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             mStoreName = (TextView) view.findViewById(R.id.storeName);
             mStoreLogo = (NetworkImageView) view.findViewById(R.id.storeLogo);
-            mStoreDescription = (JustifyTextView) view.findViewById(R.id.short_description_txt);
+            mStoreDescription = (TextView) view.findViewById(R.id.short_description_txt);
 
 
         }
