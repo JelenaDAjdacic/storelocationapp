@@ -14,6 +14,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.ajdacicjelena.storelocationapp.adapters.ViewPagerAdapterDetails;
+import com.ajdacicjelena.storelocationapp.common.config.AppConfig;
 import com.ajdacicjelena.storelocationapp.models.Store;
 import com.ajdacicjelena.storelocationapp.network.VolleySingleton;
 import com.android.volley.toolbox.ImageLoader;
@@ -30,7 +31,7 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         Intent intent = getIntent();
-        mStore = (Store) intent.getSerializableExtra("STORE");
+        mStore = (Store) intent.getSerializableExtra(AppConfig.INTENT_STORE_EXTRA_KEY);
 
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -52,7 +53,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.location_details_tab);
         if (mTabLayout != null) {
-            mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.txt_information)));
+            mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.txt_information)), true);
             mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.txt_description)));
             mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.txt_map)));
             mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
@@ -60,7 +61,6 @@ public class DetailsActivity extends AppCompatActivity {
             final ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager_one_article);
             final ViewPagerAdapterDetails adapter = new ViewPagerAdapterDetails(getSupportFragmentManager(), 3,
                     new LatLng(getStoreInfo().getLatitude(), getStoreInfo().getLongitude()), getStoreInfo().getName());
-
             mViewPager.setAdapter(adapter);
             mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
 
@@ -77,10 +77,11 @@ public class DetailsActivity extends AppCompatActivity {
 
                 @Override
                 public void onTabReselected(TabLayout.Tab tab) {
+                    mViewPager.setCurrentItem(tab.getPosition());
 
                 }
             });
-            // ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMapAsync(this);
+            mViewPager.setOffscreenPageLimit(2);
 
             if (mTextViewTitle != null) mTextViewTitle.setText(mStore.getName());
             if (mTextViewLocation != null)

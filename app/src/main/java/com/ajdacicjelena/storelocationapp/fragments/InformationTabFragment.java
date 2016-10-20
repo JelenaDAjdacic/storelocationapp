@@ -71,7 +71,7 @@ public class InformationTabFragment extends Fragment {
             mTextViewMondayRepertoire.setText(((DetailsActivity) getActivity()).getStoreInfo().getRepertoire().getMonday());
 
         }
-        if (mTextViewTuesdayRepertoire != null && ((DetailsActivity) getActivity()).getStoreInfo().getRepertoire().getTuesday().length() > 0l) {
+        if (mTextViewTuesdayRepertoire != null && ((DetailsActivity) getActivity()).getStoreInfo().getRepertoire().getTuesday().length() > 0) {
 
             mTextViewTuesdayRepertoire.setText(((DetailsActivity) getActivity()).getStoreInfo().getRepertoire().getTuesday());
 

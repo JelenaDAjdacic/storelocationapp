@@ -8,8 +8,8 @@
 
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/storeLogoDetail"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="@dimen/large_image_size"
+        android:layout_height="@dimen/large_image_size"
         android:layout_gravity="center_horizontal"
         android:contentDescription="@string/txt_image_description" />
 

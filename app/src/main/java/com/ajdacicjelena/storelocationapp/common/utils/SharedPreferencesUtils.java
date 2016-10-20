@@ -8,11 +8,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.List;
 
 public class SharedPreferencesUtils {
 
-    public static SharedPreferences.Editor getEditor(Context context, String key) {
+    private static SharedPreferences.Editor getEditor(Context context, String key) {
         SharedPreferences prefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
         return prefs.edit();
     }
@@ -36,7 +35,6 @@ public class SharedPreferencesUtils {
     public static Store[] getArrayListStore(Context context, String key) {
 
         SharedPreferences prefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
-
         Gson gson = new Gson();
         String json = prefs.getString(key, "");
         Type type = new TypeToken<Store[]>() {

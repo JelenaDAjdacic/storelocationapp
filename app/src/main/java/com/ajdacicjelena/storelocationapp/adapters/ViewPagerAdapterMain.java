@@ -5,10 +5,9 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
 
 import com.ajdacicjelena.storelocationapp.DetailsActivity;
-import com.ajdacicjelena.storelocationapp.MainActivity;
+import com.ajdacicjelena.storelocationapp.common.config.AppConfig;
 import com.ajdacicjelena.storelocationapp.common.utils.ArrayUtils;
 import com.ajdacicjelena.storelocationapp.fragments.ListTabFragment;
 import com.ajdacicjelena.storelocationapp.models.Store;
@@ -61,10 +60,9 @@ public class ViewPagerAdapterMain extends FragmentStatePagerAdapter implements O
                 @Override
                 public boolean onMarkerClick(Marker marker) {
                     marker.showInfoWindow();
-                    Log.d("CLICKED MARKER", marker.getTitle());
                     Intent intent = new Intent(context, DetailsActivity.class);
-                    intent.putExtra("STORE", ArrayUtils.getElementByName(stores, marker.getTitle()));
-                    ((MainActivity) context).startActivity(intent);
+                    intent.putExtra(AppConfig.INTENT_STORE_EXTRA_KEY, ArrayUtils.getElementByName(stores, marker.getTitle()));
+                    context.startActivity(intent);
                     return true;
                 }
             });

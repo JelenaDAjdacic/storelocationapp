@@ -25,6 +25,8 @@ public class ViewPagerAdapterDetails extends FragmentStatePagerAdapter implement
         this.mNumOfTabs = NumOfTabs;
         this.latLng = latLng;
         this.name = name;
+
+
     }
 
     @Override
@@ -38,11 +40,13 @@ public class ViewPagerAdapterDetails extends FragmentStatePagerAdapter implement
             case 2:
                 SupportMapFragment mapFragment = new SupportMapFragment();
                 mapFragment.getMapAsync(this);
+                mapFragment.setRetainInstance(true);
                 return mapFragment;
             default:
                 return null;
         }
     }
+
 
     @Override
     public int getCount() {
@@ -58,4 +62,5 @@ public class ViewPagerAdapterDetails extends FragmentStatePagerAdapter implement
 
 
     }
+
 }

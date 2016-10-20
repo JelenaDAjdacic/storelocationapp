@@ -14,6 +14,7 @@ import com.ajdacicjelena.storelocationapp.DetailsActivity;
 import com.ajdacicjelena.storelocationapp.MainActivity;
 import com.ajdacicjelena.storelocationapp.R;
 import com.ajdacicjelena.storelocationapp.adapters.RecyclerViewStores;
+import com.ajdacicjelena.storelocationapp.common.config.AppConfig;
 import com.ajdacicjelena.storelocationapp.models.Store;
 
 public class ListTabFragment extends Fragment {
@@ -37,7 +38,7 @@ public class ListTabFragment extends Fragment {
             @Override
             public void onItemClick(Store item, View view) {
                 Intent intent = new Intent(getActivity(), DetailsActivity.class);
-                intent.putExtra("STORE", item);
+                intent.putExtra(AppConfig.INTENT_STORE_EXTRA_KEY, item);
                 startActivity(intent);
             }
         });

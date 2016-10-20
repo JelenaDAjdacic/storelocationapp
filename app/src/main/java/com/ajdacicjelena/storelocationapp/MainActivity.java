@@ -5,7 +5,6 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.ajdacicjelena.storelocationapp.adapters.ViewPagerAdapterMain;
@@ -20,7 +19,6 @@ import com.ajdacicjelena.storelocationapp.network.WebRequestCallbackInterface;
 
 public class MainActivity extends AppCompatActivity {
     private VolleySingleton mVolleySingleton;
-    private String TAG = "MainActivity";
     private Store[] mStores;
     private TabLayout mTabLayout;
     private LinearLayout layout;
@@ -74,22 +72,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void webRequestSuccess(boolean success, Store[] allStores) {
                 if (success) {
-                    Log.d(TAG, "" + allStores.length);
                     SharedPreferencesUtils.putArrayListStore(getApplicationContext(), AppConfig.LIST_STORAGE_KEY, allStores);
                     setLocationsList(allStores);
                     progressDialog.hideDialog();
-                    Log.d(TAG, "INTERNET " + getLocationsList().length);
                     setupTabLayout();
                 }
             }
 
             @Override
             public void webRequestError(String error) {
-                Log.d(TAG, "Error");
                 //load data from Shared Preferences
                 if (SharedPreferencesUtils.getArrayListStore(getApplicationContext(), AppConfig.LIST_STORAGE_KEY) != null) {
                     setLocationsList(SharedPreferencesUtils.getArrayListStore(getApplicationContext(), AppConfig.LIST_STORAGE_KEY));
-                    Log.d(TAG, "NO_INTERNET " + getLocationsList().length);
                     setupTabLayout();
 
                 } else {

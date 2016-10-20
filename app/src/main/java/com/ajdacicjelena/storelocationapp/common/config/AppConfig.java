@@ -19,4 +19,8 @@ public class AppConfig {
      * Shared Preferences key - locations list
      */
     public static final String LIST_STORAGE_KEY = "LOCATIONS_LIST";
+    /**
+     * Shared Preferences key - locations list
+     */
+    public static final String INTENT_STORE_EXTRA_KEY = "STORE";
 }

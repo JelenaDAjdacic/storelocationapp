@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class PullWebContent<T> {
 
-    public WebRequestCallbackInterface<T> webRequestCallbackInterface;
+    private WebRequestCallbackInterface<T> webRequestCallbackInterface;
     //private Context context;
     private String url;
     private Class<T> t;
@@ -41,9 +41,6 @@ public class PullWebContent<T> {
      * function to pull list of all categories form web server
      */
     public void pullList() {
-        // Tag used to cancel the request
-        String tag_string_req = "req_" + url;
-
 
         final GsonRequest<T> gsonRequest = new GsonRequest<T>(url, t, null, new Response.Listener<T>() {
 
@@ -57,7 +54,7 @@ public class PullWebContent<T> {
 
                 } else {
                     Log.d("pullCategoriesResp", "NULL RESPONSE");
-                    webRequestCallbackInterface.webRequestSuccess(false, model);
+                    webRequestCallbackInterface.webRequestSuccess(false, null);
                 }
 
             }

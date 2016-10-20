@@ -13,15 +13,15 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 
-public class GsonRequest<T> extends Request<T> {
+class GsonRequest<T> extends Request<T> {
 
     private final Gson mGson = new Gson();
     private final Class<T> mClass;
     private final Map<String, String> headers;
     private final Response.Listener<T> listener;
 
-    public GsonRequest(String url, Class<T> mClass, Map<String, String> mHeaders,
-                       Response.Listener<T> listener, Response.ErrorListener errorListener) {
+    GsonRequest(String url, Class<T> mClass, Map<String, String> mHeaders,
+                Response.Listener<T> listener, Response.ErrorListener errorListener) {
         super(Method.GET, url, errorListener);
         this.mClass = mClass;
         this.headers = mHeaders;

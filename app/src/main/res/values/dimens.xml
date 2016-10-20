@@ -14,4 +14,9 @@
 
     <dimen name="line_margine">6dp</dimen>
     <dimen name="table_padding">3dp</dimen>
+
+    <dimen name="large_image_size">150dp</dimen>
+    <dimen name="medium_image_size">120dp</dimen>
+    <dimen name="small_image_size">80dp</dimen>
+
 </resources>
